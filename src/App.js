@@ -1,5 +1,8 @@
+import MiApi from "./components/MiApi";
+
 function App() {
   return (
+    <MiApi />
   );
 }
 
