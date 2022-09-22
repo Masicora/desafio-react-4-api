@@ -22,14 +22,14 @@ const MiApi = () => {
         return orderedData;
     };
 
-    const fetchDatos = async () => {
+    const fetchAutores = async () => {
         const resp = await fetch(`${link}${filtro}`);
-        const respDatos = await resp.json();
-        setDatos(sortFunction(respDatos.docs));
+        const respAutores = await resp.json();
+        setDatos(sortFunction(respAutores.docs));
     };
     useEffect(
         () => {
-            fetchDatos();
+            fetchAutores();
         }, [filtro]
     );
 
@@ -39,8 +39,11 @@ const MiApi = () => {
             <h1>Buscador de Autores y sus Obras Destacadas</h1>
             <p>Escriba el nombre del autor que desee buscar</p>
 
-            <input type="text" value={filtro} onChange={(e) => setFiltro(e.target.value)} />
-
+            <form>
+                <label for="busqueda">Autor:</label>
+                <input type="text" value={filtro} name="busqueda" onChange={(e) => setFiltro(e.target.value)} />
+            </form>
+            <hr></hr>
             <Table striped bordered hover size="sm">
                 <thead>
                     <tr>
