@@ -27,6 +27,7 @@ const MiApi = () => {
         const respAutores = await resp.json();
         setDatos(sortFunction(respAutores.docs));
     };
+
     useEffect(
         () => {
             fetchAutores();
