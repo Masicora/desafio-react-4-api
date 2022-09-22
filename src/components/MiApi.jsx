@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import Table from "react-bootstrap/Table";
+
+
 const link = "https://openlibrary.org/search/authors.json?q=";
 
 const MiApi = () => {
@@ -22,7 +25,6 @@ const MiApi = () => {
     const fetchDatos = async () => {
         const resp = await fetch(`${link}${filtro}`);
         const respDatos = await resp.json();
-
         setDatos(sortFunction(respDatos.docs));
     };
     useEffect(
@@ -36,12 +38,25 @@ const MiApi = () => {
 
             <h1>Buscador de Autores y sus Obras Destacadas</h1>
             <p>Escriba el nombre del autor que desee buscar</p>
+
             <input type="text" value={filtro} onChange={(e) => setFiltro(e.target.value)} />
-            <ul>
-                {datos.map((dato) => (
-                    <li key={dato.key}>{dato.name}-{dato.top_work}</li>
-                ))}
-            </ul>
+
+            <Table striped bordered hover size="sm">
+                <thead>
+                    <tr>
+                        <th>Autor</th>
+                        <th>Obra Destacada</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {datos.map((dato) => (
+                        <tr key={dato.key}>
+                            <td>{dato.name}</td>
+                            <td>{dato.top_work}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
         </>
     );
 };
